@@ -1,0 +1,57 @@
+# === GLOBAL ===
+.DS_Store
+Thumbs.db
+*.log
+*.env
+*.env.*
+
+# === IDEs ===
+
+# STS / Eclipse
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+# IntelliJ IDEA
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# NetBeans
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+# VS Code
+.vscode/
+
+# === BACKEND ===
+**/target/
+**/build/
+*.jar
+*.war
+
+# === FRONTEND (securevvault/frontend) ===
+frontend/node_modules/
+frontend/build/
+frontend/dist/
+frontend/.eslintcache
+frontend/.parcel-cache/
+frontend/.turbo/
+frontend/coverage/
+frontend/*.log
+frontend/.next/
+frontend/.nuxt/
+frontend/.vite/
+
+# Lock files (garde celui que tu utilises, ignore les autres)
+frontend/package-lock.json
+frontend/yarn.lock
+frontend/pnpm-lock.yaml
