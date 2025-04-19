@@ -3,35 +3,34 @@ package com.securevault.service;
 import com.securevault.model.PasswordEntry;
 import com.securevault.repository.PasswordRepository;
 import com.securevault.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
 public class PasswordService {
 
-    private final PasswordRepository passwordRepository;
-    private final UserRepository userRepository;
+    private final PasswordRepository passwordRepo;
+    private final UserRepository userRepo;
 
-    @Autowired
-    public PasswordService(PasswordRepository passwordRepository, UserRepository userRepository) {
-        this.passwordRepository = passwordRepository;
-        this.userRepository = userRepository;
+    public PasswordService(PasswordRepository passwordRepo, UserRepository userRepo) {
+        this.passwordRepo = passwordRepo;
+        this.userRepo = userRepo;
     }
 
-    public void addPasswordEntry(Long userId, String platform, String username, String password) {
-        var user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
-        PasswordEntry passwordEntry = new PasswordEntry(platform, username, password, user);
-        passwordRepository.save(passwordEntry);
+    @Transactional
+    public void add(PasswordEntry entry) {
+        passwordRepo.save(entry);
     }
 
-    public List<PasswordEntry> getAllPasswords(Long userId) {
-        var user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
-        return passwordRepository.findByUser(user);
+    public List<PasswordEntry> getAllForUser(Long userId) {
+        return userRepo.findById(userId)
+                .map(passwordRepo::findByUser)
+                .orElseThrow(() -> new RuntimeException("User not found"));
     }
 
-    public void deletePasswordEntry(Long passwordId) {
-        passwordRepository.deleteById(passwordId);
+    public void delete(Long entryId) {
+        passwordRepo.deleteById(entryId);
     }
 }
