@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-
+import { FaUserPlus, FaEdit, FaTrashAlt } from 'react-icons/fa'; // Importer des icônes
 export default function Navbar() {
   const { token, logout } = useAuth();
   const navigate = useNavigate();
@@ -18,6 +18,7 @@ export default function Navbar() {
         <>
           <Link to="/dashboard" style={{ marginRight: 15 }}>Dashboard</Link>
           <button onClick={handleLogout}>Logout</button>
+          
         </>
       ) : (
         <>          

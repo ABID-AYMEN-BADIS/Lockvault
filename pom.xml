@@ -85,13 +85,20 @@
 	</dependencies>
 
 	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<version>3.2.5</version> <!-- Assure-toi de spécifier la version -->
-			</plugin>
-		</plugins>
-	</build>
+    <plugins>
+        <plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+        </plugin>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.11.0</version> <!-- version compatible with Java 17 -->
+            <configuration>
+                <release>17</release> <!-- Change this from 21 to 17 -->
+            </configuration>
+        </plugin>
+    </plugins>
+</build>
 
 </project>

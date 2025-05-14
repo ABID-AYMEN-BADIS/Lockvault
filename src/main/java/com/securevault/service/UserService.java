@@ -43,6 +43,9 @@ public class UserService implements UserDetailsService {
 
     @Transactional
     public User register(UserDTO dto) {
+        if (dto.getPassword().length()<8){
+            throw new RuntimeException("Mot de passe doit contenir au moin 8 caractere"); 
+        }
         userRepository.findByEmail(dto.getEmail())
                 .ifPresent(u -> { throw new RuntimeException("Email already exists"); });
 

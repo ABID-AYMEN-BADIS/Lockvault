@@ -11,6 +11,14 @@ export default function Register() {
   const handleChange = e => setForm({ ...form, [e.target.name]: e.target.value });
   const handleSubmit = async e => {
     e.preventDefault();
+    if(form.password.length<8){
+      setError("le mot de passe doit contenir au moins 8 caracteres !")
+      setTimeout(() => {
+      navigate('/login');
+    }, 10000);
+      return
+    }
+    
     try {
       await register(form);
       navigate('/login');
